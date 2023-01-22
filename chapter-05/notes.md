@@ -144,3 +144,7 @@ These `User`s use `String`s and not `&str`s because the latter are references to
 
 ## An Example Program Using Structs
 
+### Refactoring with Structs: Adding More Meaning
+
+> _"...note that accessing fields of a borrowed struct instance does not move the field values, which is why you often see borrows of structs..."_
+
