@@ -201,3 +201,16 @@ Libraries can implement `derive` for their own traits, using a procedural macro,
 
 ### Defining Methods
 
+In a method, `Self` is the type of `self`, and `&self` is shorthand for `self: &Self`.
+
+A method can have the same name as a field on a struct. But the method will always be called with call parentheses (e.g. `width()` vs `width`).
+
+This pattern is often used for _getters_. We can make the `width` field _private_ (more about that in Chapter 7) and return the value using only the getter, `width()`. This makes the field read-only.
+
+There is no C-like `.` / `->` operator dichotomy in Rust because Rust uses _automatic referencing and dereferencing_. The following two lines are equivalent
+
+```rust
+(&p1).distance(&p2); // similar to C++ (*p1).distance(*p2);
+                     //   shorthand is   p1->distance(*p2);
+p1.distance(&p2);    // no need for this in Rust
+```
