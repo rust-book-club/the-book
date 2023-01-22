@@ -148,3 +148,56 @@ These `User`s use `String`s and not `&str`s because the latter are references to
 
 > _"...note that accessing fields of a borrowed struct instance does not move the field values, which is why you often see borrows of structs..."_
 
+### Adding Useful Functionality with Derived Traits
+
+`#[derive(Debug)]` allowed Rust to automatically derive a `Debug` trait implementation for our `Rectangle` struct. Other derivable traits listed in [Appendix C](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html) include
+
+`derive` can be applied to a `struct` or an `enum` definition (not tuples, though, I guess).
+
+> _"The derive attribute generates code that will implement a trait with its own default implementation on the type you’ve annotated with the derive syntax."_
+
+Every trait in the standard library that can be used with `derive`:
+- `Debug` for programmer output
+   - required for `assert_eq!` macro
+- `PartialEq` for equality comparisons
+   - enables use of the `==` and `!=` operators
+   - implements the `eq` method
+   - also required for `assert_eq!` macro
+- `Eq` for self-equality
+   - not implemented by e.g. `NaN`
+   - `PartialEq` required for `Eq`
+- `PartialOrd` for ordering comparisons
+   - provides the `<`, `>`, `<=`, `>=` operators
+   - `PartialEq` required for `PartialOrd`
+   - `partial_cmp` produces an `Option<Ordering>`
+      - e.g. a float and `NaN` produces `None`
+   - required for e.g. `gen_range` method of `rand` crate
+- `Ord` for guaranteed ordering
+   - `cmp` produces an `Ordering`; valid ordering always possible
+   - `PartialOrd` and `Eq` required for `Ord`
+- `Clone` and `Copy` for duplicating values
+   - `Clone` deep-copies data stored on the heap
+   - `Copy` duplicates data stored on the stack
+   - `Clone` is required for `Copy`
+- `Hash` for mapping a value to a value of fixed size
+   - provides the `hash` method
+- `Default` for default values
+   - provides a `default` method
+   - required for `unwrap_or_default` method on `Option<T>` values
+
+> _"The `Default::default` function is commonly used in combination with the struct update syntax discussed in... Chapter 5. You can customize a few fields of a struct and then set and use a default value for the rest of the fields by using `..Default::default()`."_
+
+The [standard library documentation](https://doc.rust-lang.org/std/index.html) gives details on how to manually implement these traits, if the default `derive`d implementations are not what you want.
+
+> _"These traits listed here are the only ones defined by the standard library that can be implemented on your types using `derive`. Other traits defined in the standard library don’t have sensible default behavior, so it’s up to you to implement them in the way that makes sense for what you’re trying to accomplish."_
+
+Libraries can implement `derive` for their own traits, using a procedural macro, covered in the ["Macros" section of Chapter 19](https://doc.rust-lang.org/book/ch19-06-macros.html#macros).
+
+## Method Syntax
+
+"Methods" are functions which
+- are defined within the context of a struct, enum, or trait
+- have `self` as the first parameter
+
+### Defining Methods
+
