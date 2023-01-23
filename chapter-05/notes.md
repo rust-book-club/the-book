@@ -214,3 +214,38 @@ There is no C-like `.` / `->` operator dichotomy in Rust because Rust uses _auto
                      //   shorthand is   p1->distance(*p2);
 p1.distance(&p2);    // no need for this in Rust
 ```
+
+### Methods with More Parameters
+
+```rust
+impl Rectangle {
+    fn can_hold(&self, other: &Self) -> bool {
+        self.height >= other.height && self.width >= other.width
+    }
+}
+```
+
+...best practice to use `&Self` here? Or `&Rectangle`?
+
+Sounds like [`&Self` is preferred](https://stackoverflow.com/a/60625592/2925434).
+
+### Associated Functions
+
+_Associated functions_ are like static functions from Java, or companion object methods from Scala. They are associated with a type, but not with a specific instance of that type
+
+```rust
+impl Rectangle {
+  fn square(size: u32) -> Self {
+    Self {
+      width: size,
+      height: size
+    }
+  }
+}
+
+fn main() {
+  Rectangle::square(5);
+}
+```
+
+> _"Each struct is allowed to have multiple `impl` blocks... We’ll see a case in which multiple `impl` blocks are useful in Chapter 10, where we discuss generic types and traits."_
