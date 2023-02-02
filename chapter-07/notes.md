@@ -82,3 +82,10 @@ Relative paths start with `self`, `super`, or an identifier in the current modul
 ### Starting Relative Paths with `super`
 
 Like `..` in a filesystem.
+
+### Making Structs and Enums Public
+
+> _"If we use `pub` before a struct definition, we make the struct public, but the struct’s fields will still be private. We can make each field public or not on a case-by-case basis."_
+
+> _"In contrast, if we make an enum public, all of its variants are then public. We only need the `pub` before the `enum` keyword..."_
+
