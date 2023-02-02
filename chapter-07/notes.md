@@ -73,3 +73,12 @@ Paths can be _absolute_ or _relative_.
 
 Relative paths start with `self`, `super`, or an identifier in the current module.
 
+### Exposing Paths with the `pub` Keyword
+
+#### Best Practices for Packages with a Binary and a Library
+
+> _"The module tree should be defined in_ src/lib.rs."
+
+### Starting Relative Paths with `super`
+
+Like `..` in a filesystem.
