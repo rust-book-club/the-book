@@ -3,17 +3,13 @@ enum IpAddr {
     V6(String)
 }
 
-fn main() {
-    let four = IpAddr::V4;
-    let six = IpAddr::V6;
-
+fn without_local_use() {
     let home = IpAddr::V4(127, 0, 0, 1);
-
     let loopback = IpAddr::V6(String::from("::1"));
-
-    println!("Hello, world!");
 }
 
-fn route(ip_kind: IpAddr) {
-    unimplemented!("???")
+fn with_local_use() {
+    use IpAddr::*;
+    let home = V4(127, 0, 0, 1);
+    let loopback = V6(String::from("::1"));
 }
