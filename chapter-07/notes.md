@@ -67,3 +67,9 @@ Asparagus.doSomething()
 
 > _"...code within a module is private by default..."_
 
+## Paths for Referring to an Item in the Module Tree
+
+Paths can be _absolute_ or _relative_.
+
+Relative paths start with `self`, `super`, or an identifier in the current module.
+
