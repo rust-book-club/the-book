@@ -89,3 +89,123 @@ Like `..` in a filesystem.
 
 > _"In contrast, if we make an enum public, all of its variants are then public. We only need the `pub` before the `enum` keyword..."_
 
+## Bringing Paths into Scope with the `use` Keyword
+
+Like inline `import`s in Scala
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+
+mod customer {
+    pub fn eat_at_restaurant() {
+        hosting::add_to_waitlist(); // fails, not in scope
+    }
+}
+```
+
+### Creating Idiomatic `use` Paths
+
+Prefer
+
+```rust
+use crate::front_of_house::hosting;
+hosting::add_to_waitlist();
+```
+
+to
+
+```rust
+use crate::front_of_house::hosting::add_to_waitlist;
+add_to_waitlist();
+```
+
+Just like in Scala
+
+```scala
+import com.mypackage.MyActor
+target ! MyActor.MyMessage
+```
+
+rather than
+
+```scala
+import com.mypackage.MyActor.MyMessage
+target ! MyMessage
+```
+
+Conflicting names can be resolved by only bringing the parent modules into scope
+
+```rust
+use std::fmt;
+use std::io;
+
+fn function1() -> fmt::Result {
+    // --snip--
+}
+
+fn function2() -> io::Result<()> {
+    // --snip--
+}
+```
+
+### Providing New Names with the as Keyword
+
+...or by using the `as` keyword, like in Scala
+
+```rust
+use std::fmt::Result;
+use std::io::Result as IoResult;
+
+fn function1() -> Result {
+    // --snip--
+}
+
+fn function2() -> IoResult<()> {
+    // --snip--
+}
+```
+
+### Re-exporting Names with `pub use`
+
+```rust
+pub use crate::front_of_house::hosting;
+```
+
+brings `hosting` into scope and also exports it from this module, so other modules bringing this one into scope can refer to `hosting` as well.
+
+### Using Nested Paths to Clean Up Large `use` Lists
+
+You can collapse `use` statements in Rust just like `import` statements in Scala
+
+```rust
+use std;
+use std::cmp::Ordering;
+use std::io;
+```
+
+is equivalent to
+
+```rust
+use std::{self, cmp::Ordering, io};
+```
+
+### The Glob Operator
+
+```rust
+use std::collections::*;
+```
+
+brings all public items from `collections` into scope.
+
+## Separating Modules into Different Files
+
