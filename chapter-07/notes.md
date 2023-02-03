@@ -209,3 +209,9 @@ brings all public items from `collections` into scope.
 
 ## Separating Modules into Different Files
 
+> _"...you only need to load a file using a `mod` declaration once in your module tree. Once the compiler knows the file is part of the project (and knows where in the module tree the code resides because of where you’ve put the `mod` statement), other files in your project should refer to the loaded file's code using a path to where it was declared... In other words, **`mod` is not an 'include' operation that you may have seen in other programming languages.**_"
+
+`mod` vs `use`
+
+> *"The compiler knows to look in this file because it came across the module declaration __in the crate root__ with the name `front_of_house`."*
+
