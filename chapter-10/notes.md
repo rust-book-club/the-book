@@ -370,5 +370,26 @@ fn main() {
 }                         // ----------+
 ```
 
-### Generic Lifetimes in Functions
+### Lifetime Annotation Syntax
+
+Lifetime annotations start with a `'`, and are usually very short (like generic types) and lowercase, like `'a`. Lifetimes only apply to references.
+
+```rust
+&i32        // a reference
+&'a i32     // a reference with an explicit lifetime
+&'a mut i32 // a mutable reference with an explicit lifetime
+```
+
+### Lifetime Annotations in Function Signatures
+
+```rust
+// the returned reference will be valid as long as both parameters are valid
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
 
