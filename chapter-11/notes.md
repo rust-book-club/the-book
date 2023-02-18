@@ -88,3 +88,36 @@ fn divide() {
 }
 ```
 
+Add an `expected` parameter to the `should_panic` attribute to ensure that not just panicking, but panicking for the expected reason:
+
+```rust
+#[test]
+#[should_panic(expected = "attempt to divide by zero")]
+fn divide() {
+    let zero = "".len();
+    1 / zero;
+}
+```
+
+### Using `Result<T, E>` in Tests
+
+You can also use `Result` / `Err` in tests instead of panicking
+
+```rust
+#[cfg(test)]
+mod tests {
+    #[test]
+    // can't use #[should_panic] here
+    fn it_works() -> Result<(), String> { // return type changes
+        if 2 + 2 == 4 {
+            Ok(()) // pass
+        } else {
+            Err(String::from("two plus two does not equal four")) // fail
+        }
+    }
+}
+```
+
+> _"Writing tests so they return a `Result<T, E>` enables you to use the question mark operator in the body of tests, which can be a convenient way to write tests that should fail if any operation within them returns an `Err` variant."_
+
+> _"To assert that an operation returns an `Err` variant_, don’t _use the question mark operator on the `Result<T, E>` value. Instead, use `assert!(value.is_err())`."_

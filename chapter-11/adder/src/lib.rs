@@ -7,7 +7,7 @@ mod tests {
     use super::*;
 
     #[test]
-    #[should_panic]
+    #[should_panic(expected = "attempt to divide by zero")]
     fn divide() {
         let zero = "".len();
         1 / zero;
