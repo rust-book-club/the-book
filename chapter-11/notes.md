@@ -40,3 +40,5 @@ mod tests {
 
 > _"Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed."_
 
+Use
+- `assert!`, `assert_eq!`, `assert_ne!`, etc.
