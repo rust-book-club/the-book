@@ -42,3 +42,40 @@ mod tests {
 
 Use
 - `assert!`, `assert_eq!`, `assert_ne!`, etc.
+
+### Testing Equality with the `assert_eq!` and `assert_ne!` Macros
+
+> _"Under the surface, the `assert_eq!` and `assert_ne!` macros use the operators `==` and `!=`, respectively. When the assertions fail, these macros print their arguments using debug formatting, which means the values being compared must implement the `PartialEq` and `Debug` traits. For structs and enums that you define yourself... this is usually as straightforward as adding the `#[derive(PartialEq, Debug)]` annotation to your struct or enum definition."_
+
+### Adding Custom Failure Messages
+
+> _"Any arguments specified after the required arguments are passed along to the `format!` macro..."_
+
+So while
+
+```rust
+assert_eq!(4, add_two(3));
+```
+
+results in
+
+```rust
+  left: `4`,
+ right: `5`', src/lib.rs:14:9
+```
+
+```rust
+assert_eq!(4, add_two(3), "{} should equal {}", 4, add_two(3));
+```
+
+results in
+
+```rust
+  left: `4`,
+ right: `5`: 4 should equal 5', src/lib.rs:14:9
+```
+
+### Checking for Panics with `should_panic`
+
+> _"We do this by adding the attribute `should_panic` to our test function."_
+
