@@ -79,3 +79,12 @@ results in
 
 > _"We do this by adding the attribute `should_panic` to our test function."_
 
+```rust
+#[test]
+#[should_panic]
+fn divide() {
+    let zero = "".len();
+    1 / zero;
+}
+```
+
