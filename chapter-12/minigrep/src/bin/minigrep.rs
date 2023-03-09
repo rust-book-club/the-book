@@ -2,6 +2,7 @@ use std::{env, process};
 
 use minigrep::Config;
 
+// run with cargo run -q --bin minigrep -- to poem.txt
 fn main() {
     let args: Vec<String> = env::args().collect();
 
