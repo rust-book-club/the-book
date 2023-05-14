@@ -454,7 +454,7 @@ Just like in Scala
     }
 ```
 
-### Quiz
+## Quiz
 
 I was very surprised that this worked
 

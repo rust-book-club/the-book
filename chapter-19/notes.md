@@ -28,7 +28,7 @@ Raw pointers are similar to references.
 
 "In the context of raw pointers, _immutable_ means that the pointer can’t be directly assigned to after being dereferenced."
 
-Rust raw pointers are []"exactly like pointers in C"](https://stanford-cs242.github.io/f19/lectures/07-2-smart-pointers.html#:~:text=Raw%20pointers,-Although%20not%20frequently&text=These%20are%20exactly%20like%20pointers,blocks%20for%20customized%20memory%20management).
+Rust raw pointers are ["exactly like pointers in C"](https://stanford-cs242.github.io/f19/lectures/07-2-smart-pointers.html#:~:text=Raw%20pointers,-Although%20not%20frequently&text=These%20are%20exactly%20like%20pointers,blocks%20for%20customized%20memory%20management).
 
 Raw pointers
 
@@ -941,4 +941,3 @@ pub fn sql(input: TokenStream) -> TokenStream {
 ```
 
 """
-
